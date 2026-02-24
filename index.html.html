@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AchkounE - Gestion Auto-École</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a56db;
+    --primary-dark: #1240a8;
+    --accent: #f97316;
+    --accent-dark: #ea6500;
+    --bg: #f0f4ff;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(26,86,219,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(26,86,219,0.25);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    background: var(--accent);
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .logo-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .logo-text span { color: var(--accent); }
+  .header-stats {
+    display: flex;
+    gap: 12px;
+  }
+  .stat-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 4px 12px;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .stat-pill span { color: #ffd700; }
+
+  /* NAV */
+  nav {
+    background: white;
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    flex: none;
+    padding: 14px 20px;
+    border: none;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+  .nav-btn:hover { color: var(--primary); }
+
+  /* CONTENT */
+  .content { padding: 20px 16px; max-width: 600px; margin: 0 auto; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon {
+    background: var(--bg);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  /* FORM */
+  .form-grid { display: flex; flex-direction: column; gap: 12px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    background: white;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover { background: #059669; }
+  .btn-danger { background: var(--danger); color: white; font-size: 12px; padding: 8px 14px; }
+  .btn-whatsapp { background: #25d366; color: white; }
+  .btn-whatsapp:hover { background: #20b858; }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-full { width: 100%; }
+  .btn-sm { font-size: 12px; padding: 8px 14px; border-radius: 8px; }
+
+  /* PAYMENT BAR */
+  .payment-summary {
+    background: linear-gradient(135deg, #1a56db11, #f9731611);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+  .payment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .payment-row:last-child { margin-bottom: 0; }
+  .amount { font-weight: 700; font-size: 15px; }
+  .amount.green { color: var(--success); }
+  .amount.orange { color: var(--accent); }
+  .amount.red { color: var(--danger); }
+  .progress-bar {
+    height: 8px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--success), #34d399);
+    transition: width 0.5s ease;
+  }
+
+  /* CLIENT LIST */
+  .client-item {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .client-item:hover { transform: translateY(-2px); }
+  .client-item.selected { border-left-color: var(--accent); }
+  .client-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .client-name { font-weight: 700; font-size: 15px; }
+  .client-serial { font-size: 11px; color: var(--muted); font-weight: 500; }
+  .badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .badge-success { background: #d1fae5; color: #065f46; }
+  .badge-warning { background: #fef3c7; color: #92400e; }
+  .badge-danger { background: #fee2e2; color: #991b1b; }
+  .client-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .client-info span { display: flex; align-items: center; gap: 4px; }
+  .client-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* DASHBOARD */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .stat-value { font-size: 28px; font-weight: 900; color: var(--primary); }
+  .stat-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 4px; }
+  .stat-card.accent .stat-value { color: var(--accent); }
+  .stat-card.success .stat-value { color: var(--success); }
+  .stat-card.danger .stat-value { color: var(--danger); }
+
+  /* SEARCH */
+  .search-box {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .search-box input {
+    padding-left: 40px;
+    background: white;
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  /* EMPTY STATE */
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+  }
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty p { font-size: 14px; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 20px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .modal-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 10px;
+    margin: 0 auto 20px;
+  }
+
+  /* TABS HIDDEN */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--text);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 300;
+    transition: transform 0.3s;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* AVANCE FORM */
+  .avance-list { margin-top: 12px; }
+  .avance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .avance-amount { font-weight: 700; color: var(--success); }
+  .avance-date { color: var(--muted); font-size: 11px; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 20px 0 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🚗</div>
+    <div class="logo-text">Achkoun<span>E</span></div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill">Clients: <span id="totalClients">0</span></div>
+    <div class="stat-pill">Reste: <span id="totalReste">0</span> DH</div>
+  </div>
+</header>
+
+<nav>
+  <button class="nav-btn active" onclick="showTab('dashboard')">📊 Tableau de bord</button>
+  <button class="nav-btn" onclick="showTab('clients')">👥 Clients</button>
+  <button class="nav-btn" onclick="showTab('add')">➕ Ajouter</button>
+  <button class="nav-btn" onclick="showTab('pub')">📢 Publicité</button>
+</nav>
+
+<!-- DASHBOARD -->
+<div id="tab-dashboard" class="tab-content active">
+  <div class="content">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="dash-total">0</div>
+        <div class="stat-label">👥 Total Clients</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-value" id="dash-ca">0</div>
+        <div class="stat-label">💰 CA Total (DH)</div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-value" id="dash-paye">0</div>
+        <div class="stat-label">✅ Total Payé (DH)</div>
+      </div>
+      <div class="stat-card danger">
+        <div class="stat-value" id="dash-reste">0</div>
+        <div class="stat-label">⏳ Reste à payer (DH)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="icon">⚠️</div> Clients avec reste à payer</div>
+      <div id="dash-debiteurs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENTS -->
+<div id="tab-clients" class="tab-content">
+  <div class="content">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Rechercher un client..." id="searchInput" oninput="renderClients()">
+    </div>
+    <div id="clientsList"></div>
+  </div>
+</div>
+
+<!-- ADD CLIENT -->
+<div id="tab-add" class="tab-content">
+  <div class="content">
+    <div class="card">
+      <div class="card-title"><div class="icon">👤</div> Nouveau Client</div>
+      <div class="form-grid">
+        <div>
+          <label>Numéro de série *</label>
+          <input type="text" id="f-serial" placeholder="Ex: AE001">
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Prénom *</label>
+            <input type="text" id="f-prenom" placeholder="Prénom">
+          </div>
+          <div>
+            <label>Nom *</label>
+            <input type="text" id="f-nom" placeholder="Nom">
+          </div>
+        </div>
+        <div>
+          <label>Date de naissance</label>
+          <input type="date" id="f-dob">
+        </div>
+        <div>
+          <label>Adresse</label>
+          <input type="text" id="f-adresse" placeholder="Adresse complète">
+        </div>
+        <div>
+          <label>Téléphone / WhatsApp *</label>
+          <input type="tel" id="f-tel" placeholder="06XXXXXXXX">
+        </div>
+        <div>
+          <label>Gmail</label>
+          <input type="email" id="f-email" placeholder="exemple@gmail.com">
+        </div>
+
+        <div class="section-title">💰 Paiement</div>
+
+        <div>
+          <label>Prix total fixé (DH) *</label>
+          <input type="number" id="f-prix" placeholder="Ex: 3000">
+        </div>
+        <div>
+          <label>Première avance (DH)</label>
+          <input type="number" id="f-avance" placeholder="Ex: 500">
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="addClient()">
+          ✅ Enregistrer le client
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PUBLICITE -->
+<div id="tab-pub" class="tab-content">
+  <div class="content">
+    <div class="card">
+      <div class="card-title"><div class="icon">📢</div> Message Publicitaire</div>
+      <div class="form-grid">
+        <div>
+          <label>Votre message</label>
+          <textarea id="pub-msg" rows="5" placeholder="Bonjour ! 🚗 Auto-École AchkounE vous propose...">🚗 Auto-École AchkounE
+📞 06 61 37 22 27
+
+Obtenez votre permis rapidement avec nos moniteurs professionnels !
+✅ Formation complète
+✅ Prix compétitifs
+✅ Taux de réussite élevé
+
+Inscrivez-vous dès maintenant ! 💪</textarea>
+        </div>
+        <div>
+          <label>Envoyer à</label>
+          <select id="pub-target">
+            <option value="all">Tous les clients</option>
+            <option value="unpaid">Clients avec reste à payer</option>
+          </select>
+        </div>
+        <div id="pub-preview" style="background:var(--bg);border-radius:10px;padding:14px;font-size:13px;color:var(--text);line-height:1.6;white-space:pre-wrap;"></div>
+        <button class="btn btn-whatsapp btn-full" onclick="sendWhatsappPub()">
+          📱 Envoyer via WhatsApp Business
+        </button>
+        <p style="font-size:11px;color:var(--muted);text-align:center;">Les numéros seront copiés automatiquement. Collez-les dans WhatsApp Business.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="icon">📋</div> Numéros clients</div>
+      <div id="numbers-list" style="font-size:13px;line-height:2;color:var(--muted);">Aucun client enregistré.</div>
+      <button class="btn btn-accent btn-full" style="margin-top:12px;" onclick="copyNumbers()">📋 Copier tous les numéros</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CLIENT DETAILS -->
+<div class="modal-overlay" id="clientModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let clients = JSON.parse(localStorage.getItem('achkoune-clients') || '[]');
+
+function save() {
+  localStorage.setItem('achkoune-clients', JSON.stringify(clients));
+  updateHeader();
+  updateDashboard();
+  renderNumbersList();
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+  if(tab === 'clients') renderClients();
+  if(tab === 'pub') renderPubPreview();
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function updateHeader() {
+  document.getElementById('totalClients').textContent = clients.length;
+  const reste = clients.reduce((s, c) => s + getReste(c), 0);
+  document.getElementById('totalReste').textContent = reste.toLocaleString();
+}
+
+function getReste(c) {
+  const paye = c.avances ? c.avances.reduce((s, a) => s + Number(a.montant), 0) : 0;
+  return Math.max(0, Number(c.prix) - paye);
+}
+
+function getPaye(c) {
+  return c.avances ? c.avances.reduce((s, a) => s + Number(a.montant), 0) : 0;
+}
+
+function updateDashboard() {
+  document.getElementById('dash-total').textContent = clients.length;
+  const ca = clients.reduce((s, c) => s + Number(c.prix || 0), 0);
+  const paye = clients.reduce((s, c) => s + getPaye(c), 0);
+  const reste = clients.reduce((s, c) => s + getReste(c), 0);
+  document.getElementById('dash-ca').textContent = ca.toLocaleString();
+  document.getElementById('dash-paye').textContent = paye.toLocaleString();
+  document.getElementById('dash-reste').textContent = reste.toLocaleString();
+
+  const debiteurs = clients.filter(c => getReste(c) > 0);
+  const el = document.getElementById('dash-debiteurs');
+  if(debiteurs.length === 0) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🎉</div><p>Tous les clients sont à jour !</p></div>';
+  } else {
+    el.innerHTML = debiteurs.map(c => `
+      <div class="avance-item" onclick="openClient('${c.id}')">
+        <div>
+          <div style="font-weight:700">${c.prenom} ${c.nom}</div>
+          <div style="font-size:11px;color:var(--muted)">${c.serial}</div>
+        </div>
+        <div class="avance-amount" style="color:var(--danger)">${getReste(c).toLocaleString()} DH</div>
+      </div>
+    `).join('');
+  }
+}
+
+function addClient() {
+  const serial = document.getElementById('f-serial').value.trim();
+  const prenom = document.getElementById('f-prenom').value.trim();
+  const nom = document.getElementById('f-nom').value.trim();
+  const tel = document.getElementById('f-tel').value.trim();
+  const prix = document.getElementById('f-prix').value;
+
+  if(!serial || !prenom || !nom || !tel || !prix) {
+    toast('⚠️ Remplissez les champs obligatoires (*)');
+    return;
+  }
+
+  if(clients.find(c => c.serial === serial)) {
+    toast('❌ Ce numéro de série existe déjà !');
+    return;
+  }
+
+  const avance = document.getElementById('f-avance').value;
+  const avances = [];
+  if(avance && Number(avance) > 0) {
+    avances.push({ montant: Number(avance), date: new Date().toLocaleDateString('fr-FR') });
+  }
+
+  const client = {
+    id: Date.now().toString(),
+    serial, prenom, nom,
+    dob: document.getElementById('f-dob').value,
+    adresse: document.getElementById('f-adresse').value,
+    tel, email: document.getElementById('f-email').value,
+    prix: Number(prix),
+    avances,
+    createdAt: new Date().toLocaleDateString('fr-FR')
+  };
+
+  clients.push(client);
+  save();
+
+  // Reset form
+  ['f-serial','f-prenom','f-nom','f-dob','f-adresse','f-tel','f-email','f-prix','f-avance'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  toast('✅ Client ajouté avec succès !');
+  showTab('clients');
+  renderClients();
+}
+
+function renderClients() {
+  const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  const filtered = clients.filter(c =>
+    (c.prenom + ' ' + c.nom + ' ' + c.serial + ' ' + c.tel).toLowerCase().includes(q)
+  );
+
+  const el = document.getElementById('clientsList');
+  if(filtered.length === 0) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">👥</div><p>Aucun client trouvé</p></div>';
+    return;
+  }
+
+  el.innerHTML = filtered.map(c => {
+    const paye = getPaye(c);
+    const reste = getReste(c);
+    const pct = Math.min(100, Math.round(paye / c.prix * 100));
+    const badge = reste === 0 ? '<span class="badge badge-success">✅ Soldé</span>' :
+                  pct > 50 ? '<span class="badge badge-warning">⏳ En cours</span>' :
+                  '<span class="badge badge-danger">❗ Peu payé</span>';
+    return `
+      <div class="client-item" onclick="openClient('${c.id}')">
+        <div class="client-header">
+          <div>
+            <div class="client-name">${c.prenom} ${c.nom}</div>
+            <div class="client-serial"># ${c.serial}</div>
+          </div>
+          ${badge}
+        </div>
+        <div class="client-info">
+          <span>📞 ${c.tel}</span>
+          <span>📅 ${c.dob || 'N/A'}</span>
+          <span>💰 ${c.prix.toLocaleString()} DH</span>
+          <span>✅ ${paye.toLocaleString()} DH payé</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:10px">
+          <span>${pct}% payé</span>
+          <span style="color:var(--danger);font-weight:700">Reste: ${reste.toLocaleString()} DH</span>
+        </div>
+        <div class="client-actions">
+          <a href="https://wa.me/212${c.tel.replace(/^0/,'').replace(/\s/g,'')}" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp</a>
+          <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openClient('${c.id}')">💰 Avance</button>
+          <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteClient('${c.id}')">🗑️</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openClient(id) {
+  const c = clients.find(x => x.id === id);
+  if(!c) return;
+  const paye = getPaye(c);
+  const reste = getReste(c);
+  const pct = Math.min(100, Math.round(paye / c.prix * 100));
+
+  document.getElementById('modal-content').innerHTML = `
+    <h2 style="font-size:18px;font-weight:800;margin-bottom:4px">${c.prenom} ${c.nom}</h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px"># ${c.serial} — Inscrit le ${c.createdAt}</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;font-size:13px">
+      <div><b>📞</b> ${c.tel}</div>
+      <div><b>📅</b> ${c.dob || 'N/A'}</div>
+      <div><b>📍</b> ${c.adresse || 'N/A'}</div>
+      <div><b>✉️</b> ${c.email || 'N/A'}</div>
+    </div>
+
+    <div class="payment-summary">
+      <div class="payment-row"><span>💰 Prix total</span><span class="amount">${c.prix.toLocaleString()} DH</span></div>
+      <div class="payment-row"><span>✅ Total payé</span><span class="amount green">${paye.toLocaleString()} DH</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="payment-row"><span>⏳ Reste à payer</span><span class="amount red">${reste.toLocaleString()} DH</span></div>
+    </div>
+
+    <div class="section-title">Historique des avances</div>
+    <div class="avance-list">
+      ${(c.avances || []).length === 0 ? '<p style="font-size:13px;color:var(--muted)">Aucune avance enregistrée</p>' :
+        c.avances.map((a, i) => `
+          <div class="avance-item">
+            <div>
+              <div class="avance-amount">+ ${Number(a.montant).toLocaleString()} DH</div>
+              <div class="avance-date">${a.date}</div>
+            </div>
+            <button onclick="removeAvance('${id}', ${i})" style="background:none;border:none;font-size:18px;cursor:pointer">🗑️</button>
+          </div>
+        `).join('')
+      }
+    </div>
+
+    <div class="section-title">Ajouter une avance</div>
+    <div style="display:flex;gap:10px;margin-bottom:16px">
+      <input type="number" id="new-avance" placeholder="Montant (DH)" style="flex:1">
+      <button class="btn btn-success" onclick="addAvance('${id}')">+ Ajouter</button>
+    </div>
+
+    <div style="display:flex;gap:8px">
+      <a href="https://wa.me/212${c.tel.replace(/^0/,'').replace(/\s/g,'')}" target="_blank" class="btn btn-whatsapp" style="flex:1">💬 WhatsApp</a>
+      <button class="btn btn-primary" style="flex:1" onclick="closeModal()">✓ Fermer</button>
+    </div>
+  `;
+
+  document.getElementById('clientModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('clientModal').classList.remove('open');
+}
+
+document.getElementById('clientModal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+function addAvance(id) {
+  const c = clients.find(x => x.id === id);
+  const montant = Number(document.getElementById('new-avance').value);
+  if(!montant || montant <= 0) { toast('⚠️ Montant invalide'); return; }
+  if(!c.avances) c.avances = [];
+  c.avances.push({ montant, date: new Date().toLocaleDateString('fr-FR') });
+  save();
+  openClient(id);
+  renderClients();
+  toast('✅ Avance ajoutée !');
+}
+
+function removeAvance(id, idx) {
+  const c = clients.find(x => x.id === id);
+  c.avances.splice(idx, 1);
+  save();
+  openClient(id);
+  renderClients();
+  toast('🗑️ Avance supprimée');
+}
+
+function deleteClient(id) {
+  if(!confirm('Supprimer ce client ?')) return;
+  clients = clients.filter(c => c.id !== id);
+  save();
+  renderClients();
+  toast('🗑️ Client supprimé');
+}
+
+function renderPubPreview() {
+  document.getElementById('pub-preview').textContent = document.getElementById('pub-msg').value;
+}
+
+function renderNumbersList() {
+  const el = document.getElementById('numbers-list');
+  if(!el) return;
+  if(clients.length === 0) { el.innerHTML = 'Aucun client enregistré.'; return; }
+  el.innerHTML = clients.map(c => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+      <span><b>${c.prenom} ${c.nom}</b></span>
+      <span style="color:var(--primary);font-weight:600">${c.tel}</span>
+    </div>
+  `).join('');
+}
+
+function copyNumbers() {
+  const nums = clients.map(c => c.tel).join('\n');
+  if(!nums) { toast('Aucun numéro à copier'); return; }
+  navigator.clipboard.writeText(nums).then(() => toast('📋 Numéros copiés !'));
+}
+
+function sendWhatsappPub() {
+  const msg = document.getElementById('pub-msg').value;
+  const target = document.getElementById('pub-target').value;
+  let list = target === 'all' ? clients : clients.filter(c => getReste(c) > 0);
+  
+  if(list.length === 0) { toast('Aucun client à contacter'); return; }
+  
+  const nums = list.map(c => c.tel).join('\n');
+  navigator.clipboard.writeText(nums);
+  
+  // Open WhatsApp Business with message
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/?text=${encoded}`, '_blank');
+  toast(`📱 ${list.length} numéros copiés ! Ouvrez WhatsApp Business.`);
+}
+
+// Init
+document.getElementById('pub-msg')?.addEventListener('input', renderPubPreview);
+updateHeader();
+updateDashboard();
+renderClients();
+setTimeout(renderPubPreview, 100);
+setTimeout(renderNumbersList, 100);
+</script>
+</body>
+</html>
