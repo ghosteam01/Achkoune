@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AchkounE</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1a56db;--blue2:#1240a8;--orange:#f97316;--bg:#f0f4ff;--white:#ffffff;--text:#1e293b;--gray:#64748b;--green:#10b981;--red:#ef4444;--border:#e2e8f0;--shadow:0 4px 20px rgba(26,86,219,0.10);}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+header{background:linear-gradient(135deg,var(--blue),var(--blue2));padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(26,86,219,0.3);}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-ico{background:var(--orange);border-radius:12px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.logo-txt{color:white;font-size:20px;font-weight:700;}
+.logo-txt span{color:#ffd700;}
+.hpills{display:flex;gap:6px;}
+.hpill{background:rgba(255,255,255,0.18);border-radius:20px;padding:4px 11px;color:white;font-size:11px;font-weight:600;}
+.hpill b{color:#ffd700;}
+nav{background:white;display:flex;border-bottom:2px solid var(--border);overflow-x:auto;scrollbar-width:none;position:sticky;top:66px;z-index:99;}
+nav::-webkit-scrollbar{display:none;}
+.nbtn{flex:none;padding:13px 15px;border:none;background:none;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:var(--gray);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;}
+.nbtn.on{color:var(--blue);border-bottom-color:var(--blue);}
+.page{display:none;padding:14px;max-width:600px;margin:0 auto;}
+.page.on{display:block;}
+.card{background:var(--white);border-radius:16px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px;}
+.ctitle{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.cico{background:var(--bg);border-radius:8px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.scard{background:var(--white);border-radius:14px;padding:14px;box-shadow:var(--shadow);text-align:center;}
+.sval{font-size:26px;font-weight:900;color:var(--blue);}
+.slbl{font-size:10px;color:var(--gray);font-weight:600;margin-top:3px;}
+.scard.ora .sval{color:var(--orange);}
+.scard.grn .sval{color:var(--green);}
+.scard.red .sval{color:var(--red);}
+.fg{display:flex;flex-direction:column;gap:11px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+label{display:block;font-size:10px;font-weight:700;color:var(--gray);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;}
+input,select,textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none;-webkit-appearance:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);background:white;}
+.einp{border-color:var(--red)!important;background:#fff5f5!important;}
+.emsg{font-size:11px;color:var(--red);margin-top:2px;min-height:14px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:11px 16px;border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;-webkit-appearance:none;}
+.btn-blue{background:var(--blue);color:white;}
+.btn-green{background:var(--green);color:white;}
+.btn-red{background:var(--red);color:white;}
+.btn-wa{background:#25d366;color:white;}
+.btn-orange{background:var(--orange);color:white;}
+.btn-out{background:white;color:var(--blue);border:1.5px solid var(--blue);}
+.btn-gray{background:var(--bg);color:var(--gray);border:1.5px solid var(--border);}
+.btn-full{width:100%;}
+.btn-sm{font-size:11px;padding:7px 11px;border-radius:8px;}
+.sbox{position:relative;margin-bottom:10px;}
+.sbox input{padding-left:38px;background:white;}
+.sico{position:absolute;left:12px;top:50%;transform:translateY(-50%);}
+.fltrs{display:flex;gap:7px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.fltrs::-webkit-scrollbar{display:none;}
+.fbtn{flex:none;padding:6px 13px;border:1.5px solid var(--border);border-radius:20px;background:white;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;color:var(--gray);cursor:pointer;white-space:nowrap;}
+.fbtn.on{background:var(--blue);color:white;border-color:var(--blue);}
+.citem{background:var(--white);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:var(--shadow);border-left:4px solid var(--blue);}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.cname{font-weight:700;font-size:14px;}
+.cserial{font-size:10px;color:var(--gray);margin-top:1px;}
+.cbadges{display:flex;flex-direction:column;gap:3px;align-items:flex-end;}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;}
+.b-encours{background:#dbeafe;color:#1e40af;}
+.b-reussi{background:#d1fae5;color:#065f46;}
+.b-echoue{background:#fee2e2;color:#991b1b;}
+.b-abandonne{background:#f3f4f6;color:#374151;}
+.b-solde{background:#d1fae5;color:#065f46;}
+.b-partiel{background:#fef3c7;color:#92400e;}
+.b-nonpaye{background:#fee2e2;color:#991b1b;}
+.cinfo{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;color:var(--gray);margin-bottom:7px;}
+.pbar{height:7px;background:var(--border);border-radius:10px;overflow:hidden;margin:5px 0;}
+.pfill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--green),#34d399);}
+.cfoot{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.psum{background:linear-gradient(135deg,#f0f4ff,#fff7ed);border:1.5px solid var(--border);border-radius:12px;padding:13px;margin-top:10px;}
+.prow{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;}
+.prow:last-child{margin-bottom:0;}
+.pamt{font-weight:700;font-size:14px;}
+.pamt.grn{color:var(--green);}
+.pamt.red{color:var(--red);}
+.aitem{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--bg);border-radius:10px;margin-bottom:6px;font-size:12px;}
+.aamt{font-weight:700;color:var(--green);}
+.adate{font-size:10px;color:var(--gray);margin-top:1px;}
+.pgfltrs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.pgf{padding:10px;border:1.5px solid var(--border);border-radius:10px;text-align:center;cursor:pointer;font-size:11px;font-weight:600;color:var(--gray);}
+.pgf.on{border-color:var(--blue);background:#dbeafe;color:var(--blue);}
+.stitle{font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px;margin:14px 0 8px;border-left:3px solid var(--orange);padding-left:8px;}
+.chkrow{background:var(--bg);border-radius:10px;padding:13px;display:flex;align-items:center;gap:12px;}
+.chkrow label{margin:0;font-size:13px;text-transform:none;letter-spacing:0;color:var(--text);font-weight:600;cursor:pointer;}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:flex-end;justify-content:center;}
+.modal-bg.on{display:flex;}
+.modal{background:white;border-radius:22px 22px 0 0;padding:18px 16px;width:100%;max-width:600px;max-height:88vh;overflow-y:auto;}
+.mhandle{width:40px;height:4px;background:var(--border);border-radius:10px;margin:0 auto 16px;}
+.expbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.empty{text-align:center;padding:36px 16px;color:var(--gray);}
+.eico{font-size:44px;margin-bottom:10px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--text);color:white;padding:11px 22px;border-radius:30px;font-size:12px;font-weight:600;z-index:300;white-space:nowrap;transition:transform 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+.toast.on{transform:translateX(-50%) translateY(0);}
+.divider{display:flex;justify-content:space-between;font-size:10px;color:var(--gray);margin-bottom:8px;}
+.toggle-wrap{background:var(--bg);border-radius:10px;padding:13px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border:1.5px solid var(--border);}
+.toggle-wrap span{font-size:13px;font-weight:600;color:var(--text);}
+.toggle-track{width:48px;height:26px;border-radius:20px;background:#e2e8f0;position:relative;transition:background 0.2s;flex-shrink:0;}
+.toggle-knob{width:22px;height:22px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+.plan-item{background:var(--bg);border-radius:10px;padding:11px 12px;margin-bottom:7px;}
+.plan-heure{font-weight:800;font-size:15px;}
+.plan-nom{font-weight:700;font-size:13px;margin-top:1px;}
+.plan-sub{font-size:11px;color:var(--gray);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-ico">&#128663;</div>
+    <div class="logo-txt">Achkoun<span>E</span></div>
+  </div>
+  <div class="hpills">
+    <div class="hpill">&#128101; <b id="h-total">0</b></div>
+    <div class="hpill">&#128176; <b id="h-reste">0</b> DH</div>
+  </div>
+</header>
+
+<nav>
+  <button class="nbtn on" onclick="goTab('dashboard',this)">&#128202; Tableau</button>
+  <button class="nbtn" onclick="goTab('clients',this)">&#128101; Clients</button>
+  <button class="nbtn" onclick="goTab('ajouter',this)">&#43; Ajouter</button>
+  <button class="nbtn" onclick="goTab('planning',this)">&#128197; Planning</button>
+  <button class="nbtn" onclick="goTab('pub',this)">&#128226; Pub</button>
+  <button class="nbtn" onclick="goTab('export',this)">&#128228; Export</button>
+</nav>
+
+<!-- TABLEAU -->
+<div id="page-dashboard" class="page on">
+  <div class="sgrid">
+    <div class="scard"><div class="sval" id="d-total">0</div><div class="slbl">Clients</div></div>
+    <div class="scard ora"><div class="sval" id="d-ca">0</div><div class="slbl">CA Total DH</div></div>
+    <div class="scard grn"><div class="sval" id="d-paye">0</div><div class="slbl">Paye DH</div></div>
+    <div class="scard red"><div class="sval" id="d-reste">0</div><div class="slbl">Reste DH</div></div>
+    <div class="scard grn"><div class="sval" id="d-reussi">0</div><div class="slbl">Reussis</div></div>
+    <div class="scard red"><div class="sval" id="d-echoue">0</div><div class="slbl">Echoues</div></div>
+  </div>
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#9888;</div> Impayes urgents</div>
+    <div id="d-impay"></div>
+  </div>
+</div>
+
+<!-- CLIENTS -->
+<div id="page-clients" class="page">
+  <div class="sbox">
+    <span class="sico">&#128269;</span>
+    <input type="text" id="srch" placeholder="Rechercher nom, serie, telephone..." oninput="renderClients()">
+  </div>
+  <div class="fltrs">
+    <button class="fbtn on" onclick="setF('tous',this)">Tous</button>
+    <button class="fbtn" onclick="setF('en-cours',this)">En cours</button>
+    <button class="fbtn" onclick="setF('reussi',this)">Reussis</button>
+    <button class="fbtn" onclick="setF('echoue',this)">Echoues</button>
+    <button class="fbtn" onclick="setF('abandonne',this)">Abandonnes</button>
+    <button class="fbtn" onclick="setF('solde',this)">Soldes</button>
+    <button class="fbtn" onclick="setF('impaye',this)">Impayes</button>
+  </div>
+  <div id="clist"></div>
+</div>
+
+<!-- AJOUTER -->
+<div id="page-ajouter" class="page">
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#128100;</div> Nouveau Client</div>
+    <div class="fg">
+      <div><label>Numero de serie *</label><input type="text" id="f-serial" placeholder="Ex: AE001"><div class="emsg" id="e-serial"></div></div>
+      <div class="frow">
+        <div><label>Prenom *</label><input type="text" id="f-prenom" placeholder="Prenom"><div class="emsg" id="e-prenom"></div></div>
+        <div><label>Nom *</label><input type="text" id="f-nom" placeholder="Nom"><div class="emsg" id="e-nom"></div></div>
+      </div>
+      <div><label>Date de naissance</label><input type="date" id="f-dob"></div>
+      <div><label>Adresse</label><input type="text" id="f-adresse" placeholder="Adresse complete"></div>
+      <div><label>Telephone WhatsApp *</label><input type="tel" id="f-tel" placeholder="0661372227" oninput="chkTel('f-tel','e-tel')"><div class="emsg" id="e-tel"></div></div>
+      <div><label>Gmail</label><input type="email" id="f-email" placeholder="exemple@gmail.com"></div>
+      <div><label>Statut</label>
+        <select id="f-statut">
+          <option value="en-cours">En cours</option>
+          <option value="reussi">Reussi</option>
+          <option value="echoue">Echoue</option>
+          <option value="abandonne">Abandonne</option>
+        </select>
+      </div>
+      <div class="stitle">Visite medicale</div>
+      <div class="toggle-wrap" id="f-vmed-box" onclick="toggleVmed('f-vmed','f-vmed-box')">
+        <span>Visite medicale incluse dans le prix</span>
+        <div class="toggle-track" id="f-vmed-toggle"><div class="toggle-knob" id="f-vmed-knob"></div></div>
+        <input type="hidden" id="f-vmed" value="false">
+      </div>
+      <div class="stitle">Paiement</div>
+      <div><label>Prix total (DH) *</label><input type="number" id="f-prix" placeholder="Ex: 3000"><div class="emsg" id="e-prix"></div></div>
+      <div><label>Premiere avance (DH)</label><input type="number" id="f-avance" placeholder="Ex: 500"></div>
+      <button class="btn btn-blue btn-full" onclick="addClient()">Enregistrer le client</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLANNING -->
+<div id="page-planning" class="page">
+  <div id="plan-anniv" style="display:none;background:white;border-radius:16px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px;border-left:4px solid #f59e0b;"></div>
+  <div class="card" style="padding:12px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <button class="btn btn-gray btn-sm" onclick="changeDay(-1)">Hier</button>
+      <div style="text-align:center;">
+        <div id="plan-date-lbl" style="font-size:14px;font-weight:800;color:var(--blue)"></div>
+        <div id="plan-day-lbl" style="font-size:11px;color:var(--gray)"></div>
+      </div>
+      <button class="btn btn-gray btn-sm" onclick="changeDay(1)">Demain</button>
+    </div>
+    <button class="btn btn-blue btn-full" onclick="openAddSeance()">+ Ajouter une seance</button>
+  </div>
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#128663;</div> Voiture 1 <span id="v1-count" style="color:var(--blue);font-size:11px;margin-left:4px;font-weight:600"></span></div>
+    <div id="plan-v1"></div>
+  </div>
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#128663;</div> Voiture 2 <span id="v2-count" style="color:var(--orange);font-size:11px;margin-left:4px;font-weight:600"></span></div>
+    <div id="plan-v2"></div>
+  </div>
+</div>
+
+<!-- PUBLICITE -->
+<div id="page-pub" class="page">
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#127919;</div> Choisir les destinataires</div>
+    <div class="pgfltrs">
+      <div class="pgf on" data-p="tous" onclick="setPG(this)">Tous les clients</div>
+      <div class="pgf" data-p="impaye" onclick="setPG(this)">Impayes</div>
+      <div class="pgf" data-p="solde" onclick="setPG(this)">Soldes</div>
+      <div class="pgf" data-p="en-cours" onclick="setPG(this)">En cours</div>
+      <div class="pgf" data-p="reussi" onclick="setPG(this)">Reussis</div>
+      <div class="pgf" data-p="echoue" onclick="setPG(this)">Echoues</div>
+    </div>
+    <div id="pg-count" style="font-size:12px;color:var(--blue);font-weight:700;margin-bottom:10px;"></div>
+    <div class="stitle">Message pour ce groupe</div>
+    <p style="font-size:10px;color:var(--gray);margin-bottom:6px;">Variables : [prenom] [nom] [reste]</p>
+    <textarea id="pg-msg" rows="7" oninput="savePGMsg();renderPGList()"></textarea>
+    <div style="margin-top:10px;"><button class="btn btn-out btn-full" onclick="copyNums()">Copier tous les numeros</button></div>
+  </div>
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#128228;</div> Envoyer un par un</div>
+    <div id="pg-list"></div>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div id="page-export" class="page">
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#128228;</div> Exporter vos donnees</div>
+    <div class="expbtns">
+      <button class="btn btn-green btn-full" onclick="expCSV()">Export Excel</button>
+      <button class="btn btn-red btn-full" onclick="expPDF()">Liste PDF</button>
+      <button class="btn btn-blue btn-full" onclick="expJSON()">Sauvegarde</button>
+      <button class="btn btn-orange btn-full" onclick="impJSON()">Importer</button>
+    </div>
+    <input type="file" id="imp-file" accept=".json" style="display:none" onchange="doImport(event)">
+  </div>
+  <div class="card">
+    <div class="ctitle"><div class="cico">&#128203;</div> Apercu clients</div>
+    <div id="exp-preview" style="overflow-x:auto;font-size:12px;"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="mbg" onclick="closeMif(event)">
+  <div class="modal"><div class="mhandle"></div><div id="mcontent"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+var clients = [];
+var cFilter = "tous";
+var pgFilter = "tous";
+var pgMsgs = {};
+var seances = [];
+var planDate = new Date();
+var DEF_MSGS = {};
+var seanceType = "eleve";
+
+function initMsgs() {
+  DEF_MSGS["tous"] = "Bonjour [prenom] !\n\nAuto-Ecole AchkounE\nTel: 06 61 37 22 27\n\nNous esperons que vous allez bien.\nN hesitez pas a nous contacter.\n\nMerci de votre confiance !";
+  DEF_MSGS["impaye"] = "Bonjour [prenom] !\n\nAuto-Ecole AchkounE\nTel: 06 61 37 22 27\n\nVotre reste a payer est de : [reste]\n\nMerci de regulariser votre situation.\nPour tout arrangement, appelez-nous !\n\nMerci";
+  DEF_MSGS["solde"] = "Bonjour [prenom] !\n\nAuto-Ecole AchkounE\nTel: 06 61 37 22 27\n\nFelicitations ! Votre dossier est entierement solde.\n\nMerci pour votre confiance et bonne route !";
+  DEF_MSGS["en-cours"] = "Bonjour [prenom] !\n\nAuto-Ecole AchkounE\nTel: 06 61 37 22 27\n\nVotre formation est en cours. Continuez vos efforts !\n\nBonne chance !";
+  DEF_MSGS["reussi"] = "Bravo [prenom] !\n\nAuto-Ecole AchkounE\nTel: 06 61 37 22 27\n\nToute l equipe vous felicite pour votre reussite !\n\nBonne route et conduisez prudemment !";
+  DEF_MSGS["echoue"] = "Bonjour [prenom] !\n\nAuto-Ecole AchkounE\nTel: 06 61 37 22 27\n\nNe vous decouragez pas ! C est temporaire.\n\nNous sommes la pour vous aider a reussir.\n\nCourage !";
+}
+
+function loadData() {
+  try { var c = localStorage.getItem("ach3"); clients = c ? JSON.parse(c) : []; } catch(e) { clients = []; }
+  try { var m = localStorage.getItem("ach3m"); pgMsgs = m ? JSON.parse(m) : {}; } catch(e) { pgMsgs = {}; }
+  try { var s = localStorage.getItem("ach3s"); seances = s ? JSON.parse(s) : []; } catch(e) { seances = []; }
+}
+
+function saveData() {
+  try { localStorage.setItem("ach3", JSON.stringify(clients)); } catch(e) {}
+  updateHeader();
+  updateDash();
+}
+
+function saveSeances() {
+  try { localStorage.setItem("ach3s", JSON.stringify(seances)); } catch(e) {}
+}
+
+function saveMsgs() {
+  try { localStorage.setItem("ach3m", JSON.stringify(pgMsgs)); } catch(e) {}
+}
+
+function getReste(c) {
+  var p = 0;
+  if(c.avances) { for(var i = 0; i < c.avances.length; i++) p += Number(c.avances[i].montant); }
+  return Math.max(0, Number(c.prix) - p);
+}
+
+function getPaye(c) {
+  var p = 0;
+  if(c.avances) { for(var i = 0; i < c.avances.length; i++) p += Number(c.avances[i].montant); }
+  return p;
+}
+
+function fmtNum(n) { return Number(n).toLocaleString("fr-FR"); }
+
+function today() {
+  var d = new Date();
+  return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+}
+
+function showToast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "toast on";
+  setTimeout(function() { t.className = "toast"; }, 2500);
+}
+
+function goTab(tab, btn) {
+  var ps = document.querySelectorAll(".page");
+  for(var i = 0; i < ps.length; i++) ps[i].className = "page";
+  var nb = document.querySelectorAll(".nbtn");
+  for(var i = 0; i < nb.length; i++) nb[i].className = "nbtn";
+  document.getElementById("page-" + tab).className = "page on";
+  if(btn) btn.className = "nbtn on";
+  if(tab === "clients") renderClients();
+  if(tab === "planning") renderPlanning();
+  if(tab === "pub") { loadPGMsg(); updatePGCount(); renderPGList(); }
+  if(tab === "export") renderExpPreview();
+}
+
+function updateHeader() {
+  document.getElementById("h-total").textContent = clients.length;
+  var r = 0;
+  for(var i = 0; i < clients.length; i++) r += getReste(clients[i]);
+  document.getElementById("h-reste").textContent = fmtNum(r);
+}
+
+function updateDash() {
+  document.getElementById("d-total").textContent = clients.length;
+  var ca = 0, py = 0, re = 0, rs = 0, ec = 0;
+  for(var i = 0; i < clients.length; i++) {
+    ca += Number(clients[i].prix) || 0;
+    py += getPaye(clients[i]);
+    re += getReste(clients[i]);
+    if(clients[i].statut === "reussi") rs++;
+    if(clients[i].statut === "echoue") ec++;
+  }
+  document.getElementById("d-ca").textContent = fmtNum(ca);
+  document.getElementById("d-paye").textContent = fmtNum(py);
+  document.getElementById("d-reste").textContent = fmtNum(re);
+  document.getElementById("d-reussi").textContent = rs;
+  document.getElementById("d-echoue").textContent = ec;
+  var deb = [];
+  for(var i = 0; i < clients.length; i++) { if(getReste(clients[i]) > 0) deb.push(clients[i]); }
+  var el = document.getElementById("d-impay");
+  if(deb.length === 0) {
+    el.innerHTML = "<div class=\"empty\"><p style=\"font-size:13px\">Tous les clients sont a jour !</p></div>";
+  } else {
+    var h = "";
+    for(var i = 0; i < deb.length; i++) {
+      var c = deb[i];
+      h += "<div class=\"aitem\" style=\"cursor:pointer\" onclick=\"openClient('" + c.id + "')\">";
+      h += "<div><div style=\"font-weight:700;font-size:13px\">" + c.prenom + " " + c.nom + "</div>";
+      h += "<div style=\"font-size:10px;color:var(--gray)\">" + c.tel + "</div></div>";
+      h += "<div style=\"text-align:right\">";
+      h += "<div style=\"color:var(--red);font-weight:700;font-size:13px\">" + fmtNum(getReste(c)) + " DH</div>";
+      h += "<a href=\"tel:" + c.tel + "\" class=\"btn btn-green btn-sm\" style=\"margin-top:4px\">Appel</a>";
+      h += "</div>";
+    }
+    el.innerHTML = h;
+  }
+}
+
+function setF(f, btn) {
+  cFilter = f;
+  var fb = document.querySelectorAll(".fbtn");
+  for(var i = 0; i < fb.length; i++) fb[i].className = "fbtn";
+  btn.className = "fbtn on";
+  renderClients();
+}
+
+function getFiltCl() {
+  var q = document.getElementById("srch") ? document.getElementById("srch").value.toLowerCase() : "";
+  var list = [];
+  for(var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    var s = (c.prenom + " " + c.nom + " " + c.serial + " " + c.tel).toLowerCase();
+    if(q && s.indexOf(q) === -1) continue;
+    if(cFilter === "tous") { list.push(c); continue; }
+    if(cFilter === "solde" && getReste(c) === 0) { list.push(c); continue; }
+    if(cFilter === "impaye" && getReste(c) > 0) { list.push(c); continue; }
+    if(cFilter === c.statut) { list.push(c); continue; }
+  }
+  return list;
+}
+
+function stInfo(s) {
+  if(s === "reussi") return { lbl: "Reussi", cls: "b-reussi" };
+  if(s === "echoue") return { lbl: "Echoue", cls: "b-echoue" };
+  if(s === "abandonne") return { lbl: "Abandonne", cls: "b-abandonne" };
+  return { lbl: "En cours", cls: "b-encours" };
+}
+
+function renderClients() {
+  var list = getFiltCl();
+  var el = document.getElementById("clist");
+  if(list.length === 0) { el.innerHTML = "<div class=\"empty\"><p>Aucun client trouve</p></div>"; return; }
+  var h = "";
+  for(var i = 0; i < list.length; i++) {
+    var c = list[i];
+    var py = getPaye(c);
+    var re = getReste(c);
+    var pct = c.prix > 0 ? Math.min(100, Math.round(py / c.prix * 100)) : 0;
+    var si = stInfo(c.statut);
+    var pb = re === 0 ? "<span class=\"badge b-solde\">Solde</span>" : pct > 0 ? "<span class=\"badge b-partiel\">Partiel</span>" : "<span class=\"badge b-nonpaye\">Non paye</span>";
+    var waN = "212" + c.tel.replace(/^0/, "").replace(/\s/g, "");
+    h += "<div class=\"citem\">";
+    h += "<div class=\"chead\"><div><div class=\"cname\">" + c.prenom + " " + c.nom + "</div>";
+    h += "<div class=\"cserial\">N " + c.serial + " - " + c.createdAt + "</div></div>";
+    h += "<div class=\"cbadges\"><span class=\"badge " + si.cls + "\">" + si.lbl + "</span>" + pb + "</div></div>";
+    h += "<div class=\"cinfo\"><span>Tel: " + c.tel + "</span><span>Nais: " + (c.dob || "N/A") + "</span>";
+    h += "<span>Prix: " + fmtNum(c.prix) + " DH</span><span style=\"color:var(--red)\">Reste: " + fmtNum(re) + " DH</span></div>";
+    h += "<div class=\"pbar\"><div class=\"pfill\" style=\"width:" + pct + "%\"></div></div>";
+    h += "<div class=\"divider\"><span>" + fmtNum(py) + " DH paye (" + pct + "%)</span><span style=\"color:var(--red);font-weight:700\">" + fmtNum(re) + " DH restant</span></div>";
+    h += "<div class=\"cfoot\">";
+    h += "<a href=\"https://wa.me/" + waN + "\" target=\"_blank\" class=\"btn btn-wa btn-sm\">WA</a>";
+    h += "<a href=\"tel:" + s.tel + "\" class=\"btn btn-green btn-sm\">Appel</a>";
+    h += "<a href=\"tel:" + c.tel + "\" class=\"btn btn-green btn-sm\">Appel</a>";
+    h += "<button class=\"btn btn-blue btn-sm\" onclick=\"openClient('" + c.id + "')\">Details</button>";
+    h += "<button class=\"btn btn-orange btn-sm\" onclick=\"openEdit('" + c.id + "')\">Modifier</button>";
+    h += "<button class=\"btn btn-red btn-sm\" onclick=\"delClient('" + c.id + "')\">Suppr</button>";
+    h += "</div></div>";
+  }
+  el.innerHTML = h;
+}
+
+function chkTel(iid, eid) {
+  var v = document.getElementById(iid).value.replace(/\s/g, "");
+  var e = document.getElementById(eid);
+  var inp = document.getElementById(iid);
+  if(v && !/^0[5-7]\d{8}$/.test(v)) { e.textContent = "Format invalide (ex: 0661372227)"; inp.className = "einp"; }
+  else { e.textContent = ""; inp.className = ""; }
+}
+
+function toggleVmed(inputId, boxId) {
+  var inp = document.getElementById(inputId);
+  var toggleId = boxId.replace("-box", "-toggle");
+  var knobId = boxId.replace("-box", "-knob");
+  var tog = document.getElementById(toggleId);
+  var knob = document.getElementById(knobId);
+  var next = inp.value !== "true";
+  inp.value = next ? "true" : "false";
+  if(tog) tog.style.background = next ? "#1a56db" : "#e2e8f0";
+  if(knob) knob.style.left = next ? "24px" : "2px";
+}
+
+function addClient() {
+  var ok = true;
+  var fs = [
+    { id: "f-serial", err: "e-serial" },
+    { id: "f-prenom", err: "e-prenom" },
+    { id: "f-nom", err: "e-nom" },
+    { id: "f-tel", err: "e-tel" },
+    { id: "f-prix", err: "e-prix" }
+  ];
+  for(var i = 0; i < fs.length; i++) {
+    var v = document.getElementById(fs[i].id).value.trim();
+    var e = document.getElementById(fs[i].err);
+    var inp = document.getElementById(fs[i].id);
+    if(!v) { e.textContent = "Ce champ est obligatoire"; inp.className = "einp"; ok = false; }
+    else { e.textContent = ""; inp.className = ""; }
+  }
+  var tel = document.getElementById("f-tel").value.replace(/\s/g, "");
+  if(tel && !/^0[5-7]\d{8}$/.test(tel)) {
+    document.getElementById("e-tel").textContent = "Format invalide (ex: 0661372227)";
+    document.getElementById("f-tel").className = "einp";
+    ok = false;
+  }
+  var serial = document.getElementById("f-serial").value.trim();
+  for(var i = 0; i < clients.length; i++) {
+    if(clients[i].serial === serial) {
+      document.getElementById("e-serial").textContent = "Ce numero existe deja";
+      document.getElementById("f-serial").className = "einp";
+      ok = false;
+      break;
+    }
+  }
+  if(!ok) { showToast("Corrigez les erreurs"); return; }
+  var av = Number(document.getElementById("f-avance").value) || 0;
+  var avs = [];
+  if(av > 0) avs.push({ montant: av, date: today() });
+  var client = {
+    id: String(Date.now()),
+    serial: serial,
+    prenom: document.getElementById("f-prenom").value.trim(),
+    nom: document.getElementById("f-nom").value.trim(),
+    dob: document.getElementById("f-dob").value,
+    adresse: document.getElementById("f-adresse").value.trim(),
+    tel: tel,
+    email: document.getElementById("f-email").value.trim(),
+    statut: document.getElementById("f-statut").value,
+    vmed: document.getElementById("f-vmed").value === "true",
+    prix: Number(document.getElementById("f-prix").value),
+    avances: avs,
+    createdAt: today()
+  };
+  clients.push(client);
+  saveData();
+  var ids = ["f-serial","f-prenom","f-nom","f-dob","f-adresse","f-tel","f-email","f-prix","f-avance"];
+  for(var i = 0; i < ids.length; i++) document.getElementById(ids[i]).value = "";
+  document.getElementById("f-statut").value = "en-cours";
+  document.getElementById("f-vmed").value = "false";
+  var tog = document.getElementById("f-vmed-toggle");
+  var knob = document.getElementById("f-vmed-knob");
+  if(tog) tog.style.background = "#e2e8f0";
+  if(knob) knob.style.left = "2px";
+  showToast("Client enregistre !");
+  goTab("clients", document.querySelectorAll(".nbtn")[1]);
+}
+
+function openClient(id) {
+  var c = null;
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id === id) { c = clients[i]; break; } }
+  if(!c) return;
+  var py = getPaye(c);
+  var re = getReste(c);
+  var pct = c.prix > 0 ? Math.min(100, Math.round(py / c.prix * 100)) : 0;
+  var avH = "";
+  if(!c.avances || c.avances.length === 0) {
+    avH = "<p style=\"font-size:12px;color:var(--gray)\">Aucune avance</p>";
+  } else {
+    for(var i = 0; i < c.avances.length; i++) {
+      var a = c.avances[i];
+      avH += "<div class=\"aitem\"><div><div class=\"aamt\">+" + fmtNum(a.montant) + " DH</div><div class=\"adate\">" + a.date + "</div></div>";
+      avH += "<button onclick=\"delAvance('" + id + "'," + i + ")\" style=\"background:none;border:none;font-size:18px;cursor:pointer\">X</button></div>";
+    }
+  }
+  var waN = "212" + c.tel.replace(/^0/, "").replace(/\s/g, "");
+  var si = stInfo(c.statut);
+  var vmedTxt = c.vmed ? "Visite med. incluse" : "Visite med. non incluse";
+  var vmedBg = c.vmed ? "#ede9fe" : "#fee2e2";
+  var vmedClr = c.vmed ? "#5b21b6" : "#991b1b";
+  var h = "";
+  h += "<h2 style=\"font-size:16px;font-weight:800;margin-bottom:6px\">" + c.prenom + " " + c.nom + "</h2>";
+  h += "<div style=\"display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px\">";
+  h += "<span class=\"badge " + si.cls + "\">" + si.lbl + "</span>";
+  h += "<span class=\"badge\" style=\"background:" + vmedBg + ";color:" + vmedClr + "\">" + vmedTxt + "</span>";
+  h += re === 0 ? "<span class=\"badge b-solde\">Solde</span>" : "<span class=\"badge b-nonpaye\">" + fmtNum(re) + " DH restant</span>";
+  h += "</div>";
+  h += "<div style=\"display:grid;grid-template-columns:1fr 1fr;gap:7px;font-size:12px;background:var(--bg);border-radius:10px;padding:10px;margin-bottom:12px\">";
+  h += "<div>Serie: " + c.serial + "</div><div>Nais: " + (c.dob || "N/A") + "</div>";
+  h += "<div>Tel: " + c.tel + "</div><div>Email: " + (c.email || "N/A") + "</div>";
+  h += "<div style=\"grid-column:1/-1\">Adresse: " + (c.adresse || "N/A") + "</div>";
+  h += "</div>";
+  h += "<div class=\"psum\">";
+  h += "<div class=\"prow\"><span>Prix total</span><span class=\"pamt\">" + fmtNum(c.prix) + " DH</span></div>";
+  h += "<div class=\"prow\"><span>Total paye</span><span class=\"pamt grn\">" + fmtNum(py) + " DH</span></div>";
+  h += "<div class=\"pbar\"><div class=\"pfill\" style=\"width:" + pct + "%\"></div></div>";
+  h += "<div style=\"text-align:center;font-size:11px;color:var(--gray);margin:-2px 0 6px\">" + pct + "% paye</div>";
+  h += "<div class=\"prow\"><span>Reste a payer</span><span class=\"pamt red\">" + fmtNum(re) + " DH</span></div>";
+  h += "</div>";
+  h += "<div class=\"stitle\">Historique avances</div>" + avH;
+  h += "<div class=\"stitle\">Ajouter une avance</div>";
+  h += "<div style=\"display:flex;gap:8px;margin-bottom:12px\"><input type=\"number\" id=\"nav-amt\" placeholder=\"Montant DH\" style=\"flex:1\"><button class=\"btn btn-green\" onclick=\"addAvance('" + id + "')\">+ Ajouter</button></div>";
+  h += "<div style=\"display:flex;gap:8px;flex-wrap:wrap\">";
+  h += "<a href=\"https://wa.me/" + waN + "\" target=\"_blank\" class=\"btn btn-wa\" style=\"flex:1\">WhatsApp</a>";
+  h += "<a href=\"tel:" + c.tel + "\" class=\"btn btn-green\" style=\"flex:1\">Appel</a>";
+  h += "<button class=\"btn btn-orange\" style=\"flex:1\" onclick=\"printFiche('" + id + "')\">Imprimer fiche</button>";
+  h += "<button class=\"btn btn-out\" style=\"flex:1\" onclick=\"closeM()\">Fermer</button>";
+  h += "</div>";
+  document.getElementById("mcontent").innerHTML = h;
+  document.getElementById("mbg").className = "modal-bg on";
+}
+
+function openEdit(id) {
+  var c = null;
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id === id) { c = clients[i]; break; } }
+  if(!c) return;
+  var sts = ["en-cours","reussi","echoue","abandonne"];
+  var sls = ["En cours","Reussi","Echoue","Abandonne"];
+  var opts = "";
+  for(var i = 0; i < sts.length; i++) { opts += "<option value=\"" + sts[i] + "\"" + (c.statut === sts[i] ? " selected" : "") + ">" + sls[i] + "</option>"; }
+  var vmedBg2 = c.vmed ? "#1a56db" : "#e2e8f0";
+  var vmedLeft = c.vmed ? "24px" : "2px";
+  var vmedVal = c.vmed ? "true" : "false";
+  var h = "<h2 style=\"font-size:15px;font-weight:800;margin-bottom:14px\">Modifier - " + c.prenom + " " + c.nom + "</h2>";
+  h += "<div class=\"fg\">";
+  h += "<div><label>Numero de serie</label><input id=\"es-v\" value=\"" + c.serial + "\"></div>";
+  h += "<div class=\"frow\"><div><label>Prenom</label><input id=\"ep-v\" value=\"" + c.prenom + "\"></div><div><label>Nom</label><input id=\"en-v\" value=\"" + c.nom + "\"></div></div>";
+  h += "<div><label>Date naissance</label><input type=\"date\" id=\"ed-v\" value=\"" + (c.dob || "") + "\"></div>";
+  h += "<div><label>Adresse</label><input id=\"ea-v\" value=\"" + (c.adresse || "") + "\"></div>";
+  h += "<div><label>Telephone</label><input type=\"tel\" id=\"et-v\" value=\"" + c.tel + "\" oninput=\"chkTel('et-v','et-err')\"><div class=\"emsg\" id=\"et-err\"></div></div>";
+  h += "<div><label>Gmail</label><input type=\"email\" id=\"ee-v\" value=\"" + (c.email || "") + "\"></div>";
+  h += "<div><label>Statut</label><select id=\"ess-v\">" + opts + "</select></div>";
+  h += "<div class=\"toggle-wrap\" id=\"evm-box\" onclick=\"toggleVmed('evm-v','evm-box')\">";
+  h += "<span>Visite medicale incluse</span>";
+  h += "<div class=\"toggle-track\" id=\"evm-toggle\" style=\"background:" + vmedBg2 + "\">";
+  h += "<div class=\"toggle-knob\" id=\"evm-knob\" style=\"left:" + vmedLeft + "\"></div></div>";
+  h += "<input type=\"hidden\" id=\"evm-v\" value=\"" + vmedVal + "\"></div>";
+  h += "<div><label>Prix total DH</label><input type=\"number\" id=\"epx-v\" value=\"" + c.prix + "\"></div>";
+  h += "<div style=\"display:flex;gap:8px;margin-top:4px\">";
+  h += "<button class=\"btn btn-blue\" style=\"flex:1\" onclick=\"saveEdit('" + id + "')\">Enregistrer</button>";
+  h += "<button class=\"btn btn-gray\" style=\"flex:1\" onclick=\"closeM()\">Annuler</button>";
+  h += "</div></div>";
+  document.getElementById("mcontent").innerHTML = h;
+  document.getElementById("mbg").className = "modal-bg on";
+}
+
+function saveEdit(id) {
+  var c = null;
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id === id) { c = clients[i]; break; } }
+  if(!c) return;
+  var tel = document.getElementById("et-v").value.replace(/\s/g, "");
+  if(tel && !/^0[5-7]\d{8}$/.test(tel)) { document.getElementById("et-err").textContent = "Format invalide"; return; }
+  c.serial = document.getElementById("es-v").value.trim();
+  c.prenom = document.getElementById("ep-v").value.trim();
+  c.nom = document.getElementById("en-v").value.trim();
+  c.dob = document.getElementById("ed-v").value;
+  c.adresse = document.getElementById("ea-v").value.trim();
+  c.tel = tel;
+  c.email = document.getElementById("ee-v").value.trim();
+  c.statut = document.getElementById("ess-v").value;
+  c.vmed = document.getElementById("evm-v").value === "true";
+  c.prix = Number(document.getElementById("epx-v").value);
+  saveData();
+  closeM();
+  renderClients();
+  showToast("Modifications enregistrees !");
+}
+
+function addAvance(id) {
+  var c = null;
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id === id) { c = clients[i]; break; } }
+  if(!c) return;
+  var amt = Number(document.getElementById("nav-amt").value);
+  if(!amt || amt <= 0) { showToast("Montant invalide"); return; }
+  if(!c.avances) c.avances = [];
+  c.avances.push({ montant: amt, date: today() });
+  saveData();
+  openClient(id);
+  renderClients();
+  showToast("Avance ajoutee !");
+}
+
+function delAvance(id, idx) {
+  if(!confirm("Supprimer cette avance ?")) return;
+  var c = null;
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id === id) { c = clients[i]; break; } }
+  if(!c) return;
+  c.avances.splice(idx, 1);
+  saveData();
+  openClient(id);
+  renderClients();
+  showToast("Avance supprimee");
+}
+
+function delClient(id) {
+  if(!confirm("Supprimer ce client ?")) return;
+  var nl = [];
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id !== id) nl.push(clients[i]); }
+  clients = nl;
+  saveData();
+  renderClients();
+  showToast("Client supprime");
+}
+
+function closeM() { document.getElementById("mbg").className = "modal-bg"; }
+function closeMif(e) { if(e.target === document.getElementById("mbg")) closeM(); }
+
+/* === PLANNING === */
+function planDateKey(d) {
+  var dd = d || planDate;
+  return dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
+}
+
+function fmtDateFr(d) {
+  var jours = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  var mois = ["Jan","Fev","Mar","Avr","Mai","Jun","Jul","Aou","Sep","Oct","Nov","Dec"];
+  return jours[d.getDay()] + " " + d.getDate() + " " + mois[d.getMonth()] + " " + d.getFullYear();
+}
+
+function changeDay(delta) {
+  planDate.setDate(planDate.getDate() + delta);
+  renderPlanning();
+}
+
+function renderPlanning() {
+  var key = planDateKey();
+  var now = new Date();
+  var isToday = planDate.getFullYear() === now.getFullYear() && planDate.getMonth() === now.getMonth() && planDate.getDate() === now.getDate();
+  document.getElementById("plan-date-lbl").textContent = fmtDateFr(planDate);
+  document.getElementById("plan-day-lbl").textContent = isToday ? "Aujourd hui" : "";
+  var daySeances = [];
+  for(var i = 0; i < seances.length; i++) { if(seances[i].dateKey === key) daySeances.push(seances[i]); }
+  daySeances.sort(function(a, b) { return a.heure < b.heure ? -1 : 1; });
+  var v1 = []; var v2 = [];
+  for(var i = 0; i < daySeances.length; i++) {
+    if(daySeances[i].voiture === "1") v1.push(daySeances[i]);
+    else v2.push(daySeances[i]);
+  }
+  document.getElementById("v1-count").textContent = "(" + v1.length + " seance(s))";
+  document.getElementById("v2-count").textContent = "(" + v2.length + " seance(s))";
+  renderSeanceList("plan-v1", v1, "#1a56db");
+  renderSeanceList("plan-v2", v2, "#f97316");
+  var annivEl = document.getElementById("plan-anniv");
+  var annivs = [];
+  for(var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    if(c.dob) {
+      var parts = c.dob.split("-");
+      if(parts.length === 3) {
+        if(parseInt(parts[1]) === (planDate.getMonth() + 1) && parseInt(parts[2]) === planDate.getDate()) {
+          annivs.push(c);
+        }
+      }
+    }
+  }
+  if(annivs.length > 0) {
+    var h = "<div class=\"ctitle\"><div class=\"cico\">*</div> Anniversaires du jour !</div>";
+    for(var i = 0; i < annivs.length; i++) {
+      var c = annivs[i];
+      var age = planDate.getFullYear() - parseInt(c.dob.split("-")[0]);
+      var waNum = "212" + c.tel.replace(/^0/, "").replace(/\s/g, "");
+      var msg = encodeURIComponent("Joyeux anniversaire " + c.prenom + " ! Toute l equipe AchkounE vous souhaite une excellente journee !");
+      h += "<div class=\"aitem\"><div><div style=\"font-weight:700;font-size:13px\">" + c.prenom + " " + c.nom + "</div>";
+      h += "<div style=\"font-size:11px;color:var(--gray)\">" + age + " ans</div></div>";
+      h += "<a href=\"https://wa.me/" + waNum + "?text=" + msg + "\" target=\"_blank\" class=\"btn btn-wa btn-sm\">Feliciter</a></div>";
+    }
+    annivEl.innerHTML = h;
+    annivEl.style.display = "block";
+  } else {
+    annivEl.style.display = "none";
+  }
+}
+
+function renderSeanceList(elId, list, color) {
+  var el = document.getElementById(elId);
+  if(list.length === 0) { el.innerHTML = "<div style=\"text-align:center;padding:14px;color:var(--gray);font-size:12px\">Aucune seance prevue</div>"; return; }
+  var h = "";
+  for(var i = 0; i < list.length; i++) {
+    var s = list[i];
+    var waN = "212" + s.tel.replace(/^0/, "").replace(/\s/g, "");
+    h += "<div class=\"plan-item\" style=\"border-left:3px solid " + color + "\">";
+    h += "<div style=\"display:flex;justify-content:space-between;align-items:flex-start\">";
+    h += "<div><div class=\"plan-heure\" style=\"color:" + color + "\">" + s.heure + "</div>";
+    h += "<div class=\"plan-nom\">" + s.nom + "</div>";
+    h += "<div class=\"plan-sub\">" + s.tel;
+    if(s.type === "particulier") h += " - Particulier";
+    else h += " - Eleve";
+    h += "</div>";
+    if(s.type === "particulier" && s.prix) h += "<div style=\"font-size:11px;color:var(--green);font-weight:700;margin-top:2px\">" + fmtNum(s.prix) + " DH</div>";
+    h += "</div>";
+    h += "<div style=\"display:flex;flex-direction:column;gap:5px;align-items:flex-end\">";
+    h += "<a href=\"https://wa.me/" + waN + "\" target=\"_blank\" class=\"btn btn-wa btn-sm\">WA</a>";
+    h += "<button class=\"btn btn-red btn-sm\" onclick=\"delSeance('" + s.id + "')\">Suppr</button>";
+    h += "</div></div></div>";
+  }
+  el.innerHTML = h;
+}
+
+function openAddSeance() {
+  var opts = "<option value=\"\">-- Choisir un eleve --</option>";
+  for(var i = 0; i < clients.length; i++) {
+    opts += "<option value=\"" + clients[i].id + "\">" + clients[i].prenom + " " + clients[i].nom + " (" + clients[i].tel + ")</option>";
+  }
+  var h = "<h2 style=\"font-size:15px;font-weight:800;margin-bottom:14px\">Ajouter une seance</h2>";
+  h += "<div class=\"fg\">";
+  h += "<div style=\"display:grid;grid-template-columns:1fr 1fr;gap:8px\">";
+  h += "<button id=\"type-eleve-btn\" class=\"btn btn-blue btn-full\" onclick=\"switchType('eleve')\">Eleve</button>";
+  h += "<button id=\"type-part-btn\" class=\"btn btn-gray btn-full\" onclick=\"switchType('particulier')\">Particulier</button>";
+  h += "</div>";
+  h += "<div id=\"eleve-row\"><label>Choisir l eleve</label><select id=\"as-eleve\">" + opts + "</select></div>";
+  h += "<div id=\"part-row\" style=\"display:none\"><label>Nom complet</label><input id=\"as-nom\" placeholder=\"Nom et prenom\"></div>";
+  h += "<div id=\"part-tel-row\" style=\"display:none\"><label>Telephone</label><input type=\"tel\" id=\"as-tel\" placeholder=\"0661372227\"></div>";
+  h += "<div id=\"part-prix-row\" style=\"display:none\"><label>Prix (DH)</label><input type=\"number\" id=\"as-prix\" placeholder=\"Ex: 150\"></div>";
+  var nowDate = new Date();
+  var yyyy = nowDate.getFullYear();
+  var mm = String(nowDate.getMonth()+1).padStart(2,"0");
+  var dd2 = String(nowDate.getDate()).padStart(2,"0");
+  var todayVal = yyyy+"-"+mm+"-"+dd2;
+  h += "<div><label>Date de la seance</label><input type=\"date\" id=\"as-date\" value=\""+todayVal+"\"></div>";
+  h += "<div class=\"frow\">";
+  h += "<div><label>Heure</label><input type=\"time\" id=\"as-heure\" value=\"09:00\"></div>";
+  h += "<div><label>Voiture</label><select id=\"as-voiture\"><option value=\"1\">Voiture 1</option><option value=\"2\">Voiture 2</option></select></div>";
+  h += "</div>";
+  h += "<div style=\"display:flex;gap:8px;margin-top:4px\">";
+  h += "<button class=\"btn btn-blue\" style=\"flex:1\" onclick=\"saveSeance()\">Enregistrer</button>";
+  h += "<button class=\"btn btn-gray\" style=\"flex:1\" onclick=\"closeM()\">Annuler</button>";
+  h += "</div></div>";
+  document.getElementById("mcontent").innerHTML = h;
+  document.getElementById("mbg").className = "modal-bg on";
+  seanceType = "eleve";
+}
+
+function switchType(type) {
+  seanceType = type;
+  var isEleve = type === "eleve";
+  document.getElementById("eleve-row").style.display = isEleve ? "block" : "none";
+  document.getElementById("part-row").style.display = isEleve ? "none" : "block";
+  document.getElementById("part-tel-row").style.display = isEleve ? "none" : "block";
+  document.getElementById("part-prix-row").style.display = isEleve ? "none" : "block";
+  document.getElementById("type-eleve-btn").className = isEleve ? "btn btn-blue btn-full" : "btn btn-gray btn-full";
+  document.getElementById("type-part-btn").className = isEleve ? "btn btn-gray btn-full" : "btn btn-orange btn-full";
+}
+
+function saveSeance() {
+  var heure = document.getElementById("as-heure").value;
+  var voiture = document.getElementById("as-voiture").value;
+  if(!heure) { showToast("Entrez une heure"); return; }
+  var nom = "";
+  var tel = "";
+  var prix = "";
+  if(seanceType === "eleve") {
+    var eleveId = document.getElementById("as-eleve").value;
+    if(!eleveId) { showToast("Choisissez un eleve"); return; }
+    for(var i = 0; i < clients.length; i++) {
+      if(clients[i].id === eleveId) { nom = clients[i].prenom + " " + clients[i].nom; tel = clients[i].tel; break; }
+    }
+  } else {
+    nom = document.getElementById("as-nom").value.trim();
+    tel = document.getElementById("as-tel").value.trim();
+    prix = document.getElementById("as-prix").value;
+    if(!nom || !tel) { showToast("Nom et telephone obligatoires"); return; }
+  }
+  var dateInput = document.getElementById("as-date");
+  var chosenDate = dateInput ? dateInput.value : "";
+  var dKey = "";
+  if(chosenDate) {
+    var dp = chosenDate.split("-");
+    dKey = parseInt(dp[0]) + "-" + parseInt(dp[1]) + "-" + parseInt(dp[2]);
+  } else {
+    dKey = planDateKey();
+  }
+  var seance = {
+    id: String(Date.now()),
+    dateKey: dKey,
+    heure: heure,
+    voiture: voiture,
+    type: seanceType,
+    nom: nom,
+    tel: tel,
+    prix: prix || ""
+  };
+  seances.push(seance);
+  saveSeances();
+  closeM();
+  renderPlanning();
+  showToast("Seance ajoutee !");
+}
+
+function delSeance(id) {
+  if(!confirm("Supprimer cette seance ?")) return;
+  var nl = [];
+  for(var i = 0; i < seances.length; i++) { if(seances[i].id !== id) nl.push(seances[i]); }
+  seances = nl;
+  saveSeances();
+  renderPlanning();
+  showToast("Seance supprimee");
+}
+
+/* === PUB === */
+function setPG(el) {
+  var pgs = document.querySelectorAll(".pgf");
+  for(var i = 0; i < pgs.length; i++) pgs[i].className = "pgf";
+  el.className = "pgf on";
+  pgFilter = el.getAttribute("data-p");
+  loadPGMsg();
+  updatePGCount();
+  renderPGList();
+}
+
+function getPGCl() {
+  var list = [];
+  for(var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    if(pgFilter === "tous") { list.push(c); continue; }
+    if(pgFilter === "impaye" && getReste(c) > 0) { list.push(c); continue; }
+    if(pgFilter === "solde" && getReste(c) === 0) { list.push(c); continue; }
+    if(pgFilter === c.statut) { list.push(c); continue; }
+  }
+  return list;
+}
+
+function loadPGMsg() {
+  var msg = pgMsgs[pgFilter] !== undefined ? pgMsgs[pgFilter] : (DEF_MSGS[pgFilter] || DEF_MSGS["tous"]);
+  document.getElementById("pg-msg").value = msg;
+}
+
+function savePGMsg() { pgMsgs[pgFilter] = document.getElementById("pg-msg").value; saveMsgs(); }
+
+function updatePGCount() {
+  var list = getPGCl();
+  document.getElementById("pg-count").textContent = list.length + " client(s) selectionne(s)";
+}
+
+function getWALink(c) {
+  var msg = document.getElementById("pg-msg").value;
+  msg = msg.replace(/\[prenom\]/gi, c.prenom);
+  msg = msg.replace(/\[nom\]/gi, c.nom);
+  msg = msg.replace(/\[reste\]/gi, fmtNum(getReste(c)) + " DH");
+  var num = "212" + c.tel.replace(/^0/, "").replace(/\s/g, "");
+  return "https://wa.me/" + num + "?text=" + encodeURIComponent(msg);
+}
+
+function renderPGList() {
+  var list = getPGCl();
+  var el = document.getElementById("pg-list");
+  if(list.length === 0) { el.innerHTML = "<p style=\"font-size:13px;color:var(--gray)\">Aucun client dans cette selection</p>"; return; }
+  var h = "";
+  for(var i = 0; i < list.length; i++) {
+    var c = list[i];
+    var re = getReste(c);
+    h += "<div style=\"display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)\">";
+    h += "<div><div style=\"font-weight:700;font-size:13px\">" + (i + 1) + ". " + c.prenom + " " + c.nom + "</div>";
+    h += "<div style=\"font-size:11px;color:var(--gray)\">" + c.tel;
+    h += re > 0 ? " - <span style=\"color:var(--red);font-weight:600\">" + fmtNum(re) + " DH restant</span>" : " - <span style=\"color:var(--green);font-weight:600\">Solde</span>";
+    h += "</div></div>";
+    h += "<a href=\"" + getWALink(c) + "\" target=\"_blank\" class=\"btn btn-wa btn-sm\">Envoyer</a>";
+    h += "</div>";
+  }
+  el.innerHTML = h;
+}
+
+function copyNums() {
+  var list = getPGCl();
+  if(list.length === 0) { showToast("Aucun client"); return; }
+  var nums = [];
+  for(var i = 0; i < list.length; i++) nums.push(list[i].tel);
+  try {
+    navigator.clipboard.writeText(nums.join("\n")).then(function() { showToast(nums.length + " numeros copies !"); });
+  } catch(e) { showToast("Numeros: " + nums.join(", ")); }
+}
+
+/* === EXPORT === */
+function renderExpPreview() {
+  var el = document.getElementById("exp-preview");
+  if(clients.length === 0) { el.innerHTML = "<p>Aucun client</p>"; return; }
+  var h = "<table style=\"width:100%;border-collapse:collapse;font-size:11px\">";
+  h += "<tr style=\"background:var(--blue);color:white\"><th style=\"padding:5px\">Serie</th><th>Nom</th><th>Tel</th><th>Prix</th><th>Paye</th><th>Reste</th></tr>";
+  for(var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    var bg = i % 2 ? "var(--bg)" : "white";
+    h += "<tr style=\"background:" + bg + "\"><td style=\"padding:4px\">" + c.serial + "</td><td>" + c.prenom + " " + c.nom + "</td><td>" + c.tel + "</td><td>" + c.prix + "</td><td>" + getPaye(c) + "</td><td style=\"color:var(--red);font-weight:700\">" + getReste(c) + "</td></tr>";
+  }
+  h += "</table>";
+  el.innerHTML = h;
+}
+
+function expCSV() {
+  var rows = ["Serie,Prenom,Nom,DateNaissance,Adresse,Telephone,Email,Statut,VisiteMedicale,Prix,TotalPaye,Reste,DateInscription"];
+  for(var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    rows.push([c.serial,c.prenom,c.nom,c.dob||"",c.adresse||"",c.tel,c.email||"",c.statut||"en-cours",c.vmed?"Incluse":"Non incluse",c.prix,getPaye(c),getReste(c),c.createdAt].map(function(v) { return '"' + v + '"'; }).join(","));
+  }
+  dl("achkoune-clients.csv", "data:text/csv;charset=utf-8,\uFEFF" + encodeURIComponent(rows.join("\n")));
+  showToast("Export CSV telecharge !");
+}
+
+function expPDF() {
+  var w = window.open("", "_blank");
+  var rows = "";
+  for(var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    rows += "<tr><td>" + c.serial + "</td><td>" + c.prenom + " " + c.nom + "</td><td>" + c.tel + "</td><td>" + (c.statut || "") + "</td><td>" + (c.vmed ? "Oui" : "Non") + "</td><td>" + c.prix + " DH</td><td>" + getPaye(c) + " DH</td><td style='color:red;font-weight:bold'>" + getReste(c) + " DH</td></tr>";
+  }
+  w.document.write("<!DOCTYPE html><html><head><meta charset='UTF-8'><title>AchkounE</title><style>body{font-family:Arial;font-size:11px}h1{color:#1a56db}table{width:100%;border-collapse:collapse}th{background:#1a56db;color:white;padding:6px}td{padding:5px;border-bottom:1px solid #eee}</style></head><body><h1>Auto-Ecole AchkounE - Liste Clients</h1><p>Exporte le " + today() + " - " + clients.length + " clients</p><table><tr><th>Serie</th><th>Nom</th><th>Tel</th><th>Statut</th><th>Vis.Med</th><th>Prix</th><th>Paye</th><th>Reste</th></tr>" + rows + "</table></body></html>");
+  w.document.close();
+  w.print();
+}
+
+function expJSON() {
+  var backup = { clients: clients, messages: pgMsgs };
+  dl("achkoune-backup.json", "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backup, null, 2)));
+  showToast("Sauvegarde telechargee !");
+}
+
+function impJSON() { document.getElementById("imp-file").click(); }
+
+function doImport(e) {
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var data = JSON.parse(ev.target.result);
+      if(data.clients && Array.isArray(data.clients)) {
+        clients = data.clients;
+        if(data.messages) pgMsgs = data.messages;
+        saveMsgs();
+      } else if(Array.isArray(data)) {
+        clients = data;
+      } else { throw new Error(); }
+      saveData();
+      showToast(clients.length + " clients importes !");
+      renderClients();
+    } catch(err) { showToast("Fichier invalide"); }
+  };
+  reader.readAsText(file);
+}
+
+function dl(filename, dataUrl) {
+  var a = document.createElement("a");
+  a.href = dataUrl;
+  a.download = filename;
+  a.click();
+}
+
+/* === IMPRESSION FICHE === */
+function printFiche(id) {
+  var c = null;
+  for(var i = 0; i < clients.length; i++) { if(clients[i].id === id) { c = clients[i]; break; } }
+  if(!c) return;
+  var py = getPaye(c);
+  var re = getReste(c);
+  var pct = c.prix > 0 ? Math.min(100, Math.round(py / c.prix * 100)) : 0;
+  var stLabel = "En cours";
+  if(c.statut === "reussi") stLabel = "Reussi";
+  if(c.statut === "echoue") stLabel = "Echoue";
+  if(c.statut === "abandonne") stLabel = "Abandonne";
+  var stColor = "#1e40af"; var stBg = "#dbeafe";
+  if(c.statut === "reussi") { stColor = "#065f46"; stBg = "#d1fae5"; }
+  if(c.statut === "echoue") { stColor = "#991b1b"; stBg = "#fee2e2"; }
+  if(c.statut === "abandonne") { stColor = "#374151"; stBg = "#f3f4f6"; }
+  var avRows = "";
+  if(c.avances && c.avances.length > 0) {
+    for(var i = 0; i < c.avances.length; i++) {
+      avRows += "<tr><td class='td'>" + c.avances[i].date + "</td><td class='td' style='text-align:right;color:#10b981;font-weight:700'>" + fmtNum(c.avances[i].montant) + " DH</td></tr>";
+    }
+  } else {
+    avRows = "<tr><td colspan='2' class='td' style='color:#aaa;text-align:center'>Aucune avance</td></tr>";
+  }
+  var vmedTxt = c.vmed ? "Visite med. incluse" : "Visite med. non incluse";
+  var vmedClr = c.vmed ? "#5b21b6" : "#991b1b";
+  var vmedBg2 = c.vmed ? "#ede9fe" : "#fee2e2";
+  var conduiteRows = "";
+  var codeRows = "";
+  for(var s = 1; s <= 20; s++) {
+    var rbg = s % 2 === 0 ? "#f8faff" : "#fff";
+    conduiteRows += "<tr style='background:" + rbg + "'><td style='width:16px;text-align:center;font-weight:700;color:#1a56db;padding:2px;border:1px solid #dde;font-size:8px'>" + s + "</td><td style='padding:2px 3px;border:1px solid #dde;width:38px'></td><td style='padding:2px 3px;border:1px solid #dde;'></td></tr>";
+    codeRows += "<tr style='background:" + rbg + "'><td style='width:16px;text-align:center;font-weight:700;color:#f97316;padding:2px;border:1px solid #dde;font-size:8px'>" + s + "</td><td style='padding:2px 3px;border:1px solid #dde;width:38px'></td><td style='padding:2px 3px;border:1px solid #dde;'></td></tr>";
+  }
+  var css = "";
+  css += "@page{size:120mm 210mm portrait;margin:6mm 5mm}";
+  css += "*{box-sizing:border-box;margin:0;padding:0}";
+  css += "html,body{font-family:Arial,sans-serif;font-size:14px;color:#1e293b;background:white}";
+  css += ".page{width:110mm;margin:0 auto;page-break-after:always}";
+  css += ".page:last-child{page-break-after:auto}";
+  css += ".hdr{background:linear-gradient(135deg,#1a56db,#1240a8);color:white;padding:6px 9px;border-radius:6px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}";
+  css += ".school{font-size:13px;font-weight:900}";
+  css += ".sub{font-size:7px;opacity:0.85;margin-top:1px}";
+  css += ".pill{background:rgba(255,255,255,0.22);padding:2px 8px;border-radius:20px;font-size:8px;font-weight:700}";
+  css += ".cname{font-size:12px;font-weight:900;color:#1a56db;margin-top:1px}";
+  css += ".badges{display:flex;gap:4px;flex-wrap:wrap;margin:3px 0 5px}";
+  css += ".badge{padding:2px 8px;border-radius:20px;font-size:8px;font-weight:700}";
+  css += ".stitle{font-size:7px;font-weight:700;text-transform:uppercase;color:#64748b;border-left:2px solid #f97316;padding-left:4px;margin:5px 0 3px}";
+  css += ".g2{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:3px}";
+  css += ".field{background:#f8faff;border-radius:4px;padding:3px 6px}";
+  css += ".flbl{font-size:6.5px;color:#64748b;font-weight:700;text-transform:uppercase}";
+  css += ".fval{font-size:8.5px;font-weight:600}";
+  css += ".paybox{background:linear-gradient(135deg,#f0f4ff,#fff7ed);border:1px solid #e2e8f0;border-radius:5px;padding:5px 7px}";
+  css += ".prow{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #eef;font-size:8.5px}";
+  css += ".prow:last-child{border-bottom:none}";
+  css += ".pbar{height:5px;background:#e2e8f0;border-radius:5px;overflow:hidden;margin:3px 0 1px}";
+  css += ".pfill{height:100%;background:linear-gradient(90deg,#10b981,#34d399);border-radius:5px}";
+  css += ".pct{text-align:center;font-size:7px;color:#64748b}";
+  css += "table{width:100%;border-collapse:collapse}";
+  css += ".th{padding:3px 5px;font-size:7.5px;text-align:left;color:white}";
+  css += ".td{padding:3px 5px;border-bottom:1px solid #eef;font-size:8px}";
+  css += ".sig2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:5px}";
+  css += ".sig{border:1px solid #e2e8f0;border-radius:4px;padding:3px 6px;height:20px}";
+  css += ".siglbl{font-size:6.5px;color:#94a3b8;font-weight:700;text-transform:uppercase}";
+  css += ".footer{text-align:center;font-size:7px;color:#94a3b8;border-top:1px solid #eee;padding-top:3px;margin-top:5px}";
+  css += ".sgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px}";
+  css += ".ctitle{text-align:center;font-size:9px;font-weight:900;padding:4px;border-radius:5px;color:white;margin-bottom:3px}";
+  css += "@media print{html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}";
+  var html = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Fiche</title><style>" + css + "</style></head><body>";
+  html += "<div class='page'>";
+  html += "<div class='hdr'><div><div class='school'>AchkounE</div><div class='sub'>Auto-Ecole | 06 61 37 22 27</div></div><div style='text-align:right'><div class='pill'>N " + c.serial + "</div><div style='font-size:7px;opacity:0.8;margin-top:2px'>" + c.createdAt + "</div></div></div>";
+  html += "<div class='cname'>" + c.prenom + " " + c.nom + "</div>";
+  html += "<div class='badges'><span class='badge' style='background:" + stBg + ";color:" + stColor + "'>" + stLabel + "</span><span class='badge' style='background:" + vmedBg2 + ";color:" + vmedClr + "'>" + vmedTxt + "</span></div>";
+  html += "<div class='stitle'>Informations</div>";
+  html += "<div class='g2'><div class='field'><div class='flbl'>Date naissance</div><div class='fval'>" + (c.dob || "-") + "</div></div><div class='field'><div class='flbl'>Telephone</div><div class='fval'>" + c.tel + "</div></div><div class='field' style='grid-column:1/-1'><div class='flbl'>Adresse</div><div class='fval'>" + (c.adresse || "-") + "</div></div></div>";
+  html += "<div class='stitle'>Paiement</div>";
+  html += "<div class='paybox'><div class='prow'><span>Prix total</span><span style='font-weight:900;font-size:11px;color:#1a56db'>" + fmtNum(c.prix) + " DH</span></div><div class='prow'><span>Total paye</span><span style='font-weight:700;color:#10b981'>" + fmtNum(py) + " DH</span></div><div class='pbar'><div class='pfill' style='width:" + pct + "%'></div></div><div class='pct'>" + pct + "% paye</div><div class='prow'><span>Reste a payer</span><span style='font-weight:900;font-size:11px;color:#ef4444'>" + fmtNum(re) + " DH</span></div></div>";
+  html += "<div class='stitle'>Avances</div><table><tr><th class='th' style='background:#1a56db'>Date</th><th class='th' style='background:#1a56db;text-align:right'>Montant</th></tr>" + avRows + "</table>";
+  html += "<div class='stitle'>Paiements a completer</div><table><tr><th class='th' style='background:#475569;width:25%'>Date</th><th class='th' style='background:#475569;width:22%;text-align:right'>Montant</th><th class='th' style='background:#475569;width:22%;text-align:right'>Reste</th><th class='th' style='background:#475569;width:31%;text-align:center'>Signature</th></tr>";
+  for(var r = 0; r < 5; r++) {
+    var bg2 = r % 2 === 0 ? "#f8faff" : "white";
+    html += "<tr style='background:" + bg2 + "'><td class='td' style='height:16px'></td><td class='td'></td><td class='td'></td><td class='td'></td></tr>";
+  }
+  html += "</table>";
+  html += "<div class='sig2'><div class='sig'><div class='siglbl'>Signature client</div></div><div class='sig'><div class='siglbl'>Signature auto-ecole</div></div></div>";
+  html += "<div class='footer'>AchkounE | 06 61 37 22 27 | " + today() + "</div>";
+  html += "</div>";
+  html += "<div class='page'>";
+  html += "<div class='hdr'><div><div class='school'>AchkounE</div><div class='sub'>" + c.prenom + " " + c.nom + " | N " + c.serial + "</div></div><div style='font-size:8px;opacity:0.85'>Suivi des seances</div></div>";
+  html += "<div class='sgrid'>";
+  html += "<div><div class='ctitle' style='background:#1a56db'>Conduite</div><table style='width:100%;border-collapse:collapse;font-size:7.5px'><tr><th style='background:#1a56db;color:white;padding:2px;text-align:center;width:14px'>N</th><th style='background:#1a56db;color:white;padding:2px;text-align:left'>Date</th><th style='background:#1a56db;color:white;padding:2px;text-align:center'>Signature</th></tr>" + conduiteRows + "</table></div>";
+  html += "<div><div class='ctitle' style='background:#f97316'>Code</div><table style='width:100%;border-collapse:collapse;font-size:7.5px'><tr><th style='background:#f97316;color:white;padding:2px;text-align:center;width:14px'>N</th><th style='background:#f97316;color:white;padding:2px;text-align:left'>Date</th><th style='background:#f97316;color:white;padding:2px;text-align:center'>Signature</th></tr>" + codeRows + "</table></div>";
+  html += "</div>";
+  html += "<div class='footer' style='margin-top:5px'>AchkounE | " + c.prenom + " " + c.nom + "</div>";
+  html += "</div>";
+  html += "</body></html>";
+  var w = window.open("", "_blank");
+  w.document.write(html);
+  w.document.close();
+  setTimeout(function() { w.print(); }, 600);
+}
+
+initMsgs();
+loadData();
+updateHeader();
+updateDash();
+planDate = new Date(planDate.getFullYear(), planDate.getMonth(), planDate.getDate());
+renderPlanning();
+setTimeout(function() { loadPGMsg(); updatePGCount(); renderPGList(); }, 200);
+</script>
+</body>
+</html>
